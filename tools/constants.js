@@ -12,5 +12,5 @@ export const TEXT_SIZE = {
 
 export const PADDING = {
     horizontal : 15,
-    verticat : 15,
+    vertical : 15,
 }

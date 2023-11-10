@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { PADDING } from "../../tools/constants";
+import { white } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 
 const homeStyles = StyleSheet.create({
     header:{
@@ -17,8 +18,18 @@ const homeStyles = StyleSheet.create({
 
     userName : {
         fontSize : 16
+    },
+    scrollableList:{
+        paddingHorizontal : PADDING.horizontal,
+        paddingVertical: PADDING.vertical,
+    },
+    scrollableListItems:{
+        // paddingHorizontal : 15,
+        // paddingVertical: 15,
+        // marginRight: 15,
+        backgroundColor: 'white'
+        
     }
-    
 })
 
 export default homeStyles

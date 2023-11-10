@@ -1,24 +1,36 @@
-import { View, Text, Image, ScrollView, FlatList } from 'react-native';
+import { View, Text, Image, ScrollView, FlatList, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import homeStyles from './style';
 
-const [data, setData] = useState([]);
 
-useEffect(() => {
-  fetchDataFromAPI();
-}, []);
 
-const fetchDataFromAPI = async () => {
-  try {
-    const response = await fetch('http://localhost:3000/parkings');
-    const result = await response.json();
-    setData(result);
-  } catch (error) {
-    console.error('Erreur de récupération des données :', error);
-  }
-};
+
+
 
 const Home = () => {
+
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const getParking = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/parkings');
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getParking();
+  }, []);
+
+
   return (
     <ScrollView>
       {/* header start here */}
@@ -32,16 +44,38 @@ const Home = () => {
       {/* header end here */}
 
       {/* Liste des activités */}
-      <FlatList
-        data={data}
-        keyExtractor={(item) => item.id.toString()}
-        horizontal={true}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.name}</Text>
-          </View>
+      
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id.toString()}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          style={homeStyles.scrollableList}
+          renderItem={({ item }) => (
+            <View style={homeStyles.scrollableListItems}>
+              <Text>{item.name}</Text>
+              <Image source={{uri: item.imageUrl}}></Image>
+            </View>
+          )}
+        />
+        <Text>Hello</Text>
+
+      {/* <View style={{ flex: 1, padding: 24 }}>
+        {isLoading ? (
+          <ActivityIndicator />
+        ) : (
+          <FlatList
+            data={data}
+            keyExtractor={({ id }) => id}
+            renderItem={({ item }) => (
+              <Text>
+                {item.name}
+              </Text>
+            )}
+          />
         )}
-      />
+      </View> */}
+
       {/* Liste des activités */}
     </ScrollView>
   )
