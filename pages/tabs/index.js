@@ -3,7 +3,10 @@ import React from 'react'
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Home from '../home';
+import LoginPage from '../login';
+import RegisterPage from '../register';
+import ParkingDetailPage from '../parkings/details';
+import HomePage from '../home';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,7 +22,7 @@ const BottomTabs = () => {
     >
       <Tab.Screen
         name="tabs_home"
-        component={Home}
+        component={HomePage}
         options={{
           tabBarLabel: 'Home',
           tabBarIcon: ({ color, size }) => (
@@ -29,7 +32,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen
         name="Reservation"
-        component={Home}
+        component={LoginPage}
         options={{
           tabBarLabel: 'Reservationme',
           tabBarIcon: ({ color, size }) => (
@@ -40,7 +43,7 @@ const BottomTabs = () => {
       />
       <Tab.Screen
         name="Parametres"
-        component={Home}
+        component={RegisterPage}
         options={{
           tabBarLabel: 'parametres',
           tabBarIcon: ({ color, size }) => (

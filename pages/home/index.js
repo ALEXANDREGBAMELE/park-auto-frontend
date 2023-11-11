@@ -1,84 +1,88 @@
-import { View, Text, Image, ScrollView, FlatList, ActivityIndicator } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import homeStyles from './style';
+// Importez les modules nécessaires
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 
+// Définissez le composant de la page d'accueil
+const HomePage = ({ navigation }) => {
+  const [searchQuery, setSearchQuery] = useState('');
 
-
-
-
-
-const Home = () => {
-
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-
-  const getParking = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/parkings');
-      console.log(response);
-      const json = await response.json();
-      console.log(json);
-      setData(json);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
+  const handleSearch = () => {
+    // Vous pouvez implémenter ici la logique de recherche en fonction de `searchQuery`
+    console.log('Recherche:', searchQuery);
   };
 
-  useEffect(() => {
-    getParking();
-  }, []);
-
-
   return (
-    <ScrollView>
-      {/* header start here */}
-      <View style={homeStyles.header}>
-        <Text style={homeStyles.userName}>Alexqndre Gbamele</Text>
-        <Image
-          style={homeStyles.userImg}
-          source={require('./../../assets/images/image1.jpg')} // Remplace cela par le chemin réel de ton image
-        />
-      </View>
-      {/* header end here */}
+    <View style={styles.container}>
+      <Text style={styles.heading}>Gestion de Parking Auto</Text>
 
-      {/* Liste des activités */}
-      
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id.toString()}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          style={homeStyles.scrollableList}
-          renderItem={({ item }) => (
-            <View style={homeStyles.scrollableListItems}>
-              <Text>{item.name}</Text>
-              <Image source={{uri: item.imageUrl}}></Image>
-            </View>
-          )}
-        />
-        <Text>Hello</Text>
+      {/* Champ de recherche */}
+      <TextInput
+        style={styles.input}
+        placeholder="Où est garée votre voiture ?"
+        value={searchQuery}
+        onChangeText={(text) => setSearchQuery(text)}
+      />
 
-      {/* <View style={{ flex: 1, padding: 24 }}>
-        {isLoading ? (
-          <ActivityIndicator />
-        ) : (
-          <FlatList
-            data={data}
-            keyExtractor={({ id }) => id}
-            renderItem={({ item }) => (
-              <Text>
-                {item.name}
-              </Text>
-            )}
-          />
-        )}
-      </View> */}
+      {/* Bouton de recherche */}
+      <TouchableOpacity style={styles.button} onPress={handleSearch}>
+        <Text style={styles.buttonText}>Rechercher</Text>
+      </TouchableOpacity>
 
-      {/* Liste des activités */}
-    </ScrollView>
-  )
-}
+      {/* Liens vers différentes fonctionnalités */}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('ParkingListPage')}
+      >
+        <Text style={styles.buttonText}>Liste des Parkings</Text>
+      </TouchableOpacity>
 
-export default Home
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate('ParkingListPage')}
+      >
+        <Text style={styles.buttonText}>Réserver une Place</Text>
+      </TouchableOpacity>
+
+      {/* Ajoutez d'autres liens au besoin */}
+    </View>
+  );
+};
+
+// Styles pour le composant
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 16,
+  },
+  heading: {
+    fontSize: 24,
+    marginBottom: 16,
+    fontWeight: 'bold',
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 16,
+    paddingHorizontal: 10,
+    width: '80%',
+  },
+  button: {
+    backgroundColor: '#3498db',
+    padding: 10,
+    borderRadius: 5,
+    marginVertical: 10,
+    width: '80%',
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
+// Exportez le composant
+export default HomePage;
