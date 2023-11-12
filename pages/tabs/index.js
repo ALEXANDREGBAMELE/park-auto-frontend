@@ -7,6 +7,7 @@ import LoginPage from '../login';
 import RegisterPage from '../register';
 import ParkingDetailPage from '../parkings/details';
 import HomePage from '../home';
+import DashboardAdmin from '../dashboard';
 
 const Tab = createBottomTabNavigator();
 
@@ -32,9 +33,9 @@ const BottomTabs = () => {
       />
       <Tab.Screen
         name="Reservation"
-        component={LoginPage}
+        component={DashboardAdmin}
         options={{
-          tabBarLabel: 'Reservationme',
+          tabBarLabel: 'Admin',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),

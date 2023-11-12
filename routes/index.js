@@ -12,13 +12,14 @@ import ParkingDetailPage from '../pages/parkings/details';
 import ParkingEtagePage from '../pages/parkings/etage';
 import ParkingPlacePage from '../pages/parkings/place';
 import ReservationPage from '../pages/parkings/reservation';
+import DashboardAdmin from '../pages/dashboard';
 
 const Stack = createNativeStackNavigator();
 const Route = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-      initialRouteName='LoginPage' 
+      initialRouteName='heme' 
       screenOptions={{headerShown: false}}>
         <Stack.Screen name="home" component={BottomTabs} />
         <Stack.Screen name="ParkingListPage" component={ParkingListPage} />
@@ -27,7 +28,8 @@ const Route = () => {
         <Stack.Screen name="RegisterPage" component={RegisterPage} />
         <Stack.Screen name="ParkingEtagePage" component={ParkingEtagePage} />
         <Stack.Screen name="ParkingPlacePage" component={ParkingPlacePage} />
-        <Stack.Screen name="ReservationPage" component={ReservationPage} />
+        <Stack.Screen name="DashboardAdmin" component={DashboardAdmin} />
+        {/* <Stack.Screen name="ReservationPage" component={ReservationPage} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   )

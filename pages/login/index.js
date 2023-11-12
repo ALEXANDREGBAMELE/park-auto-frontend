@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
-// import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const LoginPage = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('https://localhost:3000/users/sign-up', {
+      const response = await fetch('http://localhost:3000/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -21,14 +21,15 @@ const LoginPage = ({ navigation }) => {
       });
 
       const data = await response.json();
-
+      console.log(data)
       if (data.success) {
-        const { role, token } = data.user;
+       
+        const { roleId, token } = data.user;
 
         // Stockez le token d'authentification dans AsyncStorage
-        // await AsyncStorage.setItem('token', token);
+        await AsyncStorage.setItem('token', token);
 
-        if (role === 'admin') {
+        if (roleId !== 1) {
           navigation.navigate('AdminHome');
         } else {
           navigation.navigate('Home');

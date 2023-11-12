@@ -89,6 +89,7 @@ const ParkingDetailPage = ({ route, navigation }) => {
             style={[styles.levelButton, selectedLevel === item && styles.selectedLevelButton, parkingsStyles.services]}
           >
             <Text>{item.name}</Text>
+            
           </TouchableOpacity>
         )}
       />
@@ -101,6 +102,7 @@ const ParkingDetailPage = ({ route, navigation }) => {
         renderItem={({ item }) => (
           <View style={styles.spotContainer}>
             <Text>{item.number}</Text>
+            <Text>{item.status}</Text>
             <Button
               title="Je réserve"
               onPress={() => {
@@ -108,13 +110,13 @@ const ParkingDetailPage = ({ route, navigation }) => {
                 if (selectedLevel) {
                   // Faites quelque chose avec le niveau sélectionné
                   // Par exemple, naviguez vers une page de réservation avec les détails
-                  navigation.navigate('ReservationPage', { parkingId: id, level: selectedLevel });
+                  navigation.navigate('', { parkingId: id, level: selectedLevel });
                 } else {
                   alert('Veuillez sélectionner un niveau avant de réserver.');
                 }
               }}
             />
-            <Text>{item.status}</Text>
+           
           </View>
         )}
       />
