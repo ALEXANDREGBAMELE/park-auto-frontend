@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
-
+import BASE_URL_LOCAL from '../../tools/constants'
 const RegisterPage = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ const RegisterPage = ({ navigation }) => {
   const handleRegister = async () => {
     try {
       // Effectuez la logique d'enregistrement (appel API, mise à jour de la base de données, etc.)
-      const registrationResponse = await fetch('http://localhost:3000/users/sign-up', {
+      const registrationResponse = await fetch(`${BASE_URL_LOCAL}/users/sign-up`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

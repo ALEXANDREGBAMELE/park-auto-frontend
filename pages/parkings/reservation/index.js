@@ -22,7 +22,7 @@
 //   };
 
 //   const handleTimeChange = async () => {
-//     if (Platform.OS === 'android') {
+//     if (Platform.OS === 'ios') {
 //       // Pour iOS, utilisez le composant DatePickerIOS
 //       // Vous pouvez personnaliser davantage cela selon vos besoins
 //     } else {

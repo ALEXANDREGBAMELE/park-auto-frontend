@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
 import parkingsStyles from '../style'
-
+import BASE_URL_LOCAL from '../../../tools/constants'
 const ParkingDetailPage = ({ route, navigation }) => {
   const { id } = route.params;
   const [parking, setParking] = useState(null);
@@ -11,7 +11,7 @@ const ParkingDetailPage = ({ route, navigation }) => {
 
   const getParkingDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/parkings/${id}`);
+      const response = await fetch(`${BASE_URL_LOCAL}/parkings/${id}`);
       const data = await response.json();
       setParking(data);
     } catch (error) {
@@ -21,7 +21,7 @@ const ParkingDetailPage = ({ route, navigation }) => {
 
   const getLevels = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/levels?parkingId=${id}`);
+      const response = await fetch(`${BASE_URL_LOCAL}/levels?parkingId=${id}`);
       const data = await response.json();
       console.log("les niveaux d'etage : " + data)
       setLevels(data);
@@ -32,7 +32,7 @@ const ParkingDetailPage = ({ route, navigation }) => {
 
   const getSpaces = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/spaces?id=${id}`);
+      const response = await fetch(`${BASE_URL_LOCAL}/spaces?id=${id}`);
       const data = await response.json();
       console.log("les places : " + data)
       setSpaces(data);

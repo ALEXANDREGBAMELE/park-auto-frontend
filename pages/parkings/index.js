@@ -3,6 +3,7 @@ import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity,Button } from
 import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import parkingsStyles from './style';
+import BASE_URL_LOCAL from '../../tools/constants'
 
 const ParkingListPage = ({ navigation }) => {
   const [parking, setParking] = useState(null);
@@ -10,7 +11,7 @@ const ParkingListPage = ({ navigation }) => {
 
   const getParkingDetails = async () => {
     try {
-      const response = await fetch('http://localhost:3000/parkings');
+      const response = await fetch(`${BASE_URL_LOCAL}/parkings`);
       const data = await response.json();
       console.log(data);
       setParking(data);
