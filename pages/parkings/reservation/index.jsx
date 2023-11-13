@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import {
@@ -41,6 +40,15 @@ const ReservationPage = ({ route, navigation }) => {
             <Button onPress={showDatepicker} title="Show date picker!" />
             <Button onPress={showTimepicker} title="Show time picker!" />
             <Text>selected: {date.toLocaleString()}</Text>
+            {show && (
+                <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode={mode}
+                    is24Hour={true}
+                    onChange={onChange}
+                />
+            )}
         </SafeAreaView>
     );
 };
