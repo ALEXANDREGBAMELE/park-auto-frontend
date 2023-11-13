@@ -12,13 +12,16 @@ const LoginPage = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+          "https://nodejsclusters-153945-0.cloudclusters.net/users/login",
+          {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email, password }),
+          }
+      );
 
       const data = await response.json();
       console.log(data)
