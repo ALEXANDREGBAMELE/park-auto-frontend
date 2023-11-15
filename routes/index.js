@@ -19,7 +19,7 @@ const Route = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator 
-      initialRouteName='heme' 
+      initialRouteName='home' 
       screenOptions={{headerShown: false}}>
         <Stack.Screen name="home" component={BottomTabs} />
         <Stack.Screen name="ParkingListPage" component={ParkingListPage} />

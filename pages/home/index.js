@@ -18,7 +18,7 @@ const HomePage = ({ navigation }) => {
       {/* Champ de recherche */}
       <TextInput
         style={styles.input}
-        placeholder="Où est garée votre voiture ?"
+        placeholder="Où est garée ma voiture ?"
         value={searchQuery}
         onChangeText={(text) => setSearchQuery(text)}
       />

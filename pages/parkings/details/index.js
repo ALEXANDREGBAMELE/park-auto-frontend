@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Button, FlatList, TouchableOpacity } from 'react-native';
 import parkingsStyles from '../style'
 
+
 const ParkingDetailPage = ({ route, navigation }) => {
   const { id } = route.params;
   const [parking, setParking] = useState(null);

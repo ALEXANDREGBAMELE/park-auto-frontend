@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const LoginPage = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,30 +13,34 @@ const LoginPage = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch(
-          "https://nodejsclusters-153945-0.cloudclusters.net/users/login",
-          {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email, password }),
-          }
-      );
+
+
+      const response = await fetch(`http://localhost:3000/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       const data = await response.json();
+      console.log(response)
       console.log(data)
-      if (data.success) {
+      console.log("Premier debeugeur, " + data.data)
+      console.log("Deuxieme debeugeur, " + data.user)
+      console.log("Troisieme debeugeur, " + data.statut)
+      if (response.status === 200) {
        
-        const { roleId, token } = data.user;
+        const token= data.token;
+        const user = data.user;
 
         // Stockez le token d'authentification dans AsyncStorage
         await AsyncStorage.setItem('token', token);
-
-        if (roleId !== 1) {
-          navigation.navigate('AdminHome');
+        console.log(user.roleId)
+        if (user.roleId === 1) {
+          navigation.navigate('DashboardAdmin');
         } else {
-          navigation.navigate('Home');
+          navigation.navigate('home');
         }
       } else {
         console.log('L\'authentification a échoué.');

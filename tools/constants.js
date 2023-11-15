@@ -14,3 +14,6 @@ export const PADDING = {
     horizontal : 15,
     vertical : 15,
 }
+
+// export const BASE_URL_LOCAL = "http://localhost:3000/"
+// export const BASE_URL_ONLINE = "https://nodejsclusters-153945-0.cloudclusters.net/users"

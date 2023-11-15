@@ -4,15 +4,15 @@ import { SearchBar } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import parkingsStyles from './style';
 
+
 const ParkingListPage = ({ navigation }) => {
   const [parking, setParking] = useState(null);
   const [searchText, setSearchText] = useState('');
 
   const getParkingDetails = async () => {
     try {
-      const response = await fetch('http://localhost:3000/parkings');
+      const response = await fetch(`http://localhost:3000/parkings`);
       const data = await response.json();
-      console.log(data);
       setParking(data);
     } catch (error) {
       console.error('Erreur lors de la récupération des détails du parking:', error);
